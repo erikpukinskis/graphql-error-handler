@@ -1,6 +1,8 @@
-import { GraphQLFormattedError, DocumentNode } from 'graphql'
+import { DocumentNode, GraphQLFormattedError } from 'graphql'
 
-export declare default = (
+declare const graphqlErrorHandler: (
   error: GraphQLFormattedError,
   query: string | DocumentNode,
   filename?: string) => never
+
+export default graphqlErrorHandler

@@ -2,5 +2,12 @@
   "name": "graphql-error-handler",
   "license": "MIT",
   "version": "0.1.0",
-  "main": "index.js"
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
+  "peerDependencies": {
+    "@types/graphql": "*"
+  }
 }

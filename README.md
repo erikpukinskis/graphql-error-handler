@@ -5,19 +5,48 @@
 
 It also has no dependencies!
 
-# Have your tests throw nice errors when testing your Apollo Server:
+### Catching errors in Apollo Client:
+
+The `useQuery` and `useMutation` hooks Apollo Client provides can throw errors in two ways: First,
+if there's an error in the resolver, you'll get a 200 response from your GraphQL server and it will
+just an `errors` field. Second, if there's a problem in your query validation, or if there is just
+a bad proxy or some other random problem, the hook will throw.
+
+So, to handle all of those situations gracefully, you can wrap your mutation or query with a
+`handleResult`:
+
+```
+const MyComponent = () => {
+  const [createWhen] = useMutation(
+    gql`
+      mutation {
+        myMutation {
+          id
+        }
+      }
+    `
+  )
+
+  const handleClick = () => {
+    const { data } = await handleResult(createWhen)
+    console.log(data.myMutation.id)
+  }
+
+  return <button onClick={handleClick}>Mutate</button>
+}
+```
+Note that TypeScript will know that `data` is always going to be truthy, because `handleResult` will
+throw a nice error in any other circumstance.
+
+# Catching server errors when testing Apollo Server:
 
 Add a test helper like so:
 ```
-import graphqlErrorHandler from 'graphql-error-handler';
+import { handleResult } from 'graphql-error-handler';
 
 export const getApolloQueryFunction = (apollo: ApolloServer) => {
   return async (query: Operation['query'], variables?: Operation['variables']) => {
-    const out = await apollo.executeOperation({ query, variables })
-    if (out.errors) {
-      graphqlErrorHandler(out.errors[0], query)
-    }
-    return out
+    return await handleResult(apollo.executeOperation({ query, variables }))
   }
 }
 ```
@@ -55,7 +84,7 @@ it won't tell you where it is. `graphql-error-handler` can help:
 ```
 // jest-transform-graphql.js
 const loader = require('graphql-tag/loader');
-const graphQLErrorHandler = require("graphql-error-handler")
+const { throwError } = require("graphql-error-handler")
 
 module.exports = {
   process(src, filename) {
@@ -64,7 +93,7 @@ module.exports = {
     try {
       return loader.call({ cacheable() { } }, src);
     } catch (e) {
-      graphQLErrorHandler(e, src, filename)
+      handleLoaderError(e, src, filename)
     }
   },
 };

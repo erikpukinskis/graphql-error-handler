@@ -2,15 +2,19 @@
   "name": "graphql-error-handler",
   "license": "MIT",
   "version": "0.4.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "files": [
-    "index.js",
-    "index.d.ts"
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
   ],
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "check:types": "tsc --noEmit"
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
+    "check:types": "tsc --noEmit",
+    "build": "npm run build:babel; npm run build:types",
+    "build:babel": "babel src --extensions .ts --out-dir dist",
+    "build:types": "tsc src/index.ts --declaration --emitDeclarationOnly --outDir dist --esModuleInterop --skipLibCheck"
   },
   "peerDependencies": {
     "@types/graphql": "*"
@@ -19,6 +23,7 @@
     "@apollo/client": "^3.5.7",
     "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.12",
+    "@babel/plugin-transform-runtime": "^7.16.10",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
     "@types/jest": "^27.4.0",

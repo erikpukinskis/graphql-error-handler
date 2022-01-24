@@ -16,6 +16,8 @@ So, to handle all of those situations gracefully, you can wrap your mutation or 
 `handleResult`:
 
 ```
+import { handleResult } from 'graphql-error-handler'
+
 const MyComponent = () => {
   const [createWhen] = useMutation(
     gql`

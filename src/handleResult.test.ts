@@ -1,5 +1,6 @@
 import NetworkError from './test/NetworkError.json'
 import ServerParseError from './test/ServerParseError.json'
+import ValidationFailed from './test/ValidationFailed.json'
 import { handleResult } from "./handleResult"
 
 describe("handleResult", () => {
@@ -28,6 +29,23 @@ describe("handleResult", () => {
     // await expect(async () => {
     //   await operation
     // }).rejects.toThrow()
+
+    try {
+      await handleResult(operation)
+    } catch (e) {
+      expect(e.message).toMatch("<<< ERROR OCCURRED HERE >>>createWhens")
+      expect(e.message).toMatch("handleResult.test.ts")
+      return
+    }
+    throw new Error("no error was caught")
+  })
+
+  it("should work on a validation failure", async() => {
+    const operation = (async () => {
+      const error = new Error()
+      Object.assign(error, ValidationFailed)
+      throw error
+    })()
 
     try {
       await handleResult(operation)

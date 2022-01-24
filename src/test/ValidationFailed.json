@@ -1,0 +1,22 @@
+{
+    "graphQLErrors": [
+        {
+            "message": "Cannot query field \"createWhens\" on type \"Mutation\". Did you mean \"createWhen\", \"createThen\", or \"createStory\"?",
+            "extensions": {
+                "code": "GRAPHQL_VALIDATION_FAILED",
+                "locations": [
+                    {
+                        "line": 2,
+                        "column": 3
+                    }
+                ],
+                "operation": {
+                    "source": "mutation CreateWhenAndStory($text: String!) {\n  createWhens(text: $text) {\n    id\n    storyId\n    __typename\n  }\n}"
+                }
+            }
+        }
+    ],
+    "clientErrors": [],
+    "networkError": null,
+    "message": "Cannot query field \"createWhens\" on type \"Mutation\". Did you mean \"createWhen\", \"createThen\", or \"createStory\"?"
+}

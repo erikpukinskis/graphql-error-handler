@@ -1,0 +1,2 @@
+// NetworkError => thrown
+// ServerParseError => thrown

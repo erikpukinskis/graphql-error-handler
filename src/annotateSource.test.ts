@@ -1,5 +1,5 @@
 import { annotateSource } from "./annotateSource"
-import { SourceLocation } from "./graphql"
+import { SourceLocation } from "graphql"
 
 describe("annotateSource", () => {
   it("should mark the position in the query where the error occurred", () => {

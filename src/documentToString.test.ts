@@ -1,5 +1,6 @@
 import { documentToString } from './documentToString';
 import { DocumentNode } from 'graphql';
+import gql from "graphql-tag";
 
 describe("documentToString", () => {
   it("should deindent", () => {
@@ -44,17 +45,11 @@ describe("documentToString", () => {
   })
 
   it("should work with a DocumentNode", () => {
-    const doc: DocumentNode = {
-      loc: {
-        source: {
-          body: `
-            query MeQuery($id: ID!) {
-              me(id: $id)
-            }
-          `
-        }
+    const doc = gql`
+      query MeQuery($id: ID!) {
+        me(id: $id)
       }
-    }
+    `
 
     const lines = documentToString(doc).split("\n")
 

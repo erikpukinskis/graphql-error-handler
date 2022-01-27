@@ -13,7 +13,7 @@
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "check:types": "tsc --noEmit",
     "build": "npm run build:babel; npm run build:types",
-    "build:babel": "babel src --extensions .ts --out-dir dist",
+    "build:babel": "babel src --extensions .ts --source-maps --out-dir dist",
     "build:types": "tsc src/index.ts --declaration --emitDeclarationOnly --outDir dist --esModuleInterop --skipLibCheck",
     "bump": "./bump.sh"
   },

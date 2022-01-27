@@ -5,6 +5,5 @@
   ],
   "plugins": [
     ["@babel/transform-runtime"]
-  ],
-  "sourceMaps": "inline"
+  ]
 }

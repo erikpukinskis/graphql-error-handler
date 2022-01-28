@@ -5,7 +5,7 @@ Error.stackTraceLimit = 20
 
 export const handleResult = async (promise: Promise<FetchResult<any, Record<string, any>, Record<string, any>>>) => {
   const spareError = new Error('Spare Error')
-  const callStack = spareError.stack.split("\n").slice(10).join("\n")
+  const callStack = spareError.stack
   try {
     const { data, errors } = await promise
     if (!data) {

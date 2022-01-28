@@ -19,6 +19,7 @@ export const throwError = (message: string, operationSource: string | DocumentNo
   } else {
     console.warn('Cannot show location of error in GraphQL source because no query was found in the error extensions. Did you install the IncludeQueryOnErrorPlugin in your ApolloServer instance?')
   }
+  stack = stack.split("\n").slice(1).join("\n")
   const error = `${message}\n${annotatedQuery ? `${annotatedQuery}\n` : ''}${stack}\n`
   throw new Error(error)
 }

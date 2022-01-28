@@ -35,12 +35,13 @@ describe("handleResult", () => {
     } catch (e) {
       expect(e.message).toMatch("<<< ERROR OCCURRED HERE >>>createWhens")
       expect(e.message).toMatch("handleResult.test.ts")
+      expect(e.message).not.toMatch("Spare Error")
       return
     }
     throw new Error("no error was caught")
   })
 
-  it("should work on a validation failure", async() => {
+  it("should work on a ValidationFailed error", async() => {
     const operation = (async () => {
       const error = new Error()
       Object.assign(error, ValidationFailed)
@@ -52,12 +53,13 @@ describe("handleResult", () => {
     } catch (e) {
       expect(e.message).toMatch("<<< ERROR OCCURRED HERE >>>createWhens")
       expect(e.message).toMatch("handleResult.test.ts")
+      expect(e.message).not.toMatch("Spare Error")
       return
     }
     throw new Error("no error was caught")
   })
 
-  it("should work on a server parse error", async() => {
+  it("should work on a ServerParseError", async() => {
     const operation = (async () => {
       const error = new Error()
       Object.assign(error, ServerParseError)
@@ -68,6 +70,7 @@ describe("handleResult", () => {
       await handleResult(operation)
     } catch (e) {
       expect(e.message).toMatch("Unexpected token < in JSON at position 0")
+      expect(e.message).not.toMatch("Spare Error")
       return
     }
     throw new Error("no error was caught")

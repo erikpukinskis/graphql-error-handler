@@ -1,7 +1,7 @@
 {
   "name": "graphql-error-handler",
   "license": "MIT",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "main": "dist/index.js",
   "files": [
     "dist/**/*.js",

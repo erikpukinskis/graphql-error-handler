@@ -1,5 +1,5 @@
 import { annotateSource } from './annotateSource'
-import { SourceLocation } from 'graphql'
+import { SourceLocation, DocumentNode } from 'graphql'
 
 // Example GraphQL error:
 // {
@@ -12,7 +12,7 @@ import { SourceLocation } from 'graphql'
 //   ]
 // }
 
-export const throwError = (message: string, operationSource: string, location: SourceLocation, stack: string, filename?: string) => {
+export const throwError = (message: string, operationSource: string | DocumentNode, location: SourceLocation, stack: string, filename?: string) => {
   let annotatedQuery
   if (operationSource && location) {
     annotatedQuery = annotateSource(operationSource, location, filename)

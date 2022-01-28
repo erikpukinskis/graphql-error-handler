@@ -14,7 +14,7 @@ export const handleResult = async (promise: Promise<FetchResult<any, Record<stri
     }
     return { data }
   } catch (e) {
-    if (e.networkError) {
+    if (e.networkError && e.networkError.result) {
       const { extensions, originalError, message } = e.networkError.result.errors[0]
       const stack = originalError ? originalError.stack : callStack
       throwError(
@@ -22,7 +22,7 @@ export const handleResult = async (promise: Promise<FetchResult<any, Record<stri
         extensions.operation.source,
         extensions.locations[0],
         stack)
-    } else if (e.graphQLErrors) {
+    } else if (e.graphQLErrors && e.graphQLErrors.length > 0) {
       const { extensions, message } = e.graphQLErrors[0]
       throwError(
         message,

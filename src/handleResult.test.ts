@@ -56,4 +56,20 @@ describe("handleResult", () => {
     }
     throw new Error("no error was caught")
   })
+
+  it("should work on a server parse error", async() => {
+    const operation = (async () => {
+      const error = new Error()
+      Object.assign(error, ServerParseError)
+      throw error
+    })()
+
+    try {
+      await handleResult(operation)
+    } catch (e) {
+      expect(e.message).toMatch("Unexpected token < in JSON at position 0")
+      return
+    }
+    throw new Error("no error was caught")
+  })
 })

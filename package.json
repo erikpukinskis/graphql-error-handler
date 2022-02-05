@@ -8,16 +8,6 @@
     "dist/**/*.d.ts",
     "dist/**/*.js.map"
   ],
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
-    "check:types": "tsc --noEmit",
-    "build": "npm run build:vite; npm run build:types",
-    "build:vite": "vite build",
-    "build:types": "tsc src/index.ts --declaration --emitDeclarationOnly --outDir dist --esModuleInterop --skipLibCheck",
-    "bump": "./bump.sh"
-  },
   "peerDependencies": {
     "@types/graphql": "*"
   },
@@ -33,5 +23,20 @@
     "typescript": "^4.5.5",
     "vite": "^2.7.13",
     "vitest": "^0.2.5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/erikpukinskis/graphql-error-handler.git"
+  },
+  "homepage": "https://github.com/erikpukinskis/graphql-error-handler",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
+    "check:types": "tsc --noEmit",
+    "build": "npm run build:vite; npm run build:types",
+    "build:vite": "vite build",
+    "build:types": "tsc src/index.ts --showConfig --declaration --emitDeclarationOnly --outDir dist --esModuleInterop --skipLibCheck",
+    "bump": "./bump.sh"
+  },
 }

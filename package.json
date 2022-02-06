@@ -2,12 +2,15 @@
   "name": "graphql-error-handler",
   "license": "MIT",
   "version": "0.14.0",
-  "main": "dist/index.js",
-  "files": [
-    "dist/**/*.js",
-    "dist/**/*.d.ts",
-    "dist/**/*.js.map"
-  ],
+  "files": ["dist"],
+  "main": "./dist/my-lib.umd.js",
+  "module": "./dist/my-lib.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/my-lib.es.js",
+      "require": "./dist/my-lib.umd.js"
+    }
+  },
   "peerDependencies": {
     "@types/graphql": "*"
   },

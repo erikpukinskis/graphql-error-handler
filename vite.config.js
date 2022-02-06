@@ -6,7 +6,7 @@ module.exports = defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'graphql-error-handler',
-      fileName: (format) => `index.js`
+      fileName: (format) => `my-lib.${format}.js`
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled

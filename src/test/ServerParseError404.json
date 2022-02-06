@@ -1,0 +1,32 @@
+{
+    "graphQLErrors": [],
+    "clientErrors": [],
+    "networkError": {
+        "name": "ServerParseError",
+        "response": {
+            "type": "default",
+            "status": 404,
+            "ok": false,
+            "statusText": "",
+            "headers": {
+                "map": {
+                    "access-control-allow-origin": "*",
+                    "content-length": "0",
+                    "date": "Sun, 06 Feb 2022 01:00:08 GMT",
+                    "server": "nginx/1.17.7",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains",
+                    "x-content-type-options": "nosniff",
+                    "x-served-by": "vsclk-pf-prod-rel-usw2-cluster",
+                    "content-type": "text/xml"
+                }
+            },
+            "url": "https://erikpukinskis-super-project-world-application-pj7xx93r7r5-3000.githubpreview.dev/graphql",
+            "_bodyInit": {},
+            "_bodyBlob": {},
+            "bodyUsed": true
+        },
+        "statusCode": 404,
+        "bodyText": ""
+    },
+    "message": "Unexpected end of JSON input"
+}

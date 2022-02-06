@@ -1,5 +1,5 @@
 import NetworkError from './test/NetworkError.json'
-import ServerParseError from './test/ServerParseError.json'
+import ServerParseError from './test/ServerParseError502.json'
 import ValidationFailed from './test/ValidationFailed.json'
 import { handleResult } from "./handleResult"
 import { describe, it, expect } from 'vitest'

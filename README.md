@@ -5,12 +5,38 @@
 
 It also has no dependencies!
 
-### Catching errors in Apollo Client:
+### Todo
+* [ ] Make sure `handleResult` handles 404s as gracefully as `errorLink`. Add a test for
+  `ServeParseError404.json`.
 
-The `useQuery` and `useMutation` hooks Apollo Client provides can throw errors in two ways: First,
-if there's an error in the resolver, you'll get a 200 response from your GraphQL server and it will
-just an `errors` field. Second, if there's a problem in your query validation, or if there is just
-a bad proxy or some other random problem, the hook will throw.
+### Setting up the error link
+
+A good number of errors can be caught by an Apollo Client error link. This includes 40x and 50x
+responses from the server, which will be returned as `ServerParseError`. You can set up an error
+link like this:
+
+```js
+import { ApolloClient, from, HttpLink } from "@apollo/client"
+import { errorLink } from 'graphql-error-handler'
+
+const client = new ApolloClient({
+  link: from([
+    errorLink,
+    new HttpLink({
+      uri: 'http://localhost:4000/graphql',
+    })
+  ])
+});
+````
+
+### Guaranteeing `data` in components
+
+There are also errors that can't be caught by the error link, and have to be taken care of at the
+site of the `useQuery` and `useMutation` hooks.
+
+Specifically, if there's an error in the resolver, you'll get a 200 response from your GraphQL
+server and it will just return `errors` field. In addition if there's a problem in your query validation,
+or if there is just a bad proxy or some other random problem, the hook will throw.
 
 So, to handle all of those situations gracefully, you can wrap your mutation or query with a
 `handleResult`:
@@ -40,7 +66,7 @@ const MyComponent = () => {
 Note that TypeScript will know that `data` is always going to be truthy, because `handleResult` will
 throw a nice error in any other circumstance.
 
-# Catching server errors when testing Apollo Server:
+### Catching server errors in resolver tests:
 
 Add a test helper like so:
 ```
@@ -78,7 +104,7 @@ it("should return four stories", async () => {
 Under normal circumstances, with the typo, data will simply be undefined. But with
 `graphql-error-handler` you'll get a nice listing of where exactly the typo is.
 
-# Catching parsing errors when loading .grapqhl files in Jest:
+### Catching parsing errors when loading .grapqhl files in Jest:
 
 You can use graphql-tag to load .schema files in Jest, but if there's an error,
 it won't tell you where it is. `graphql-error-handler` can help:

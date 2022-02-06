@@ -1,5 +1,6 @@
 import { FetchResult } from "@apollo/client";
 import { throwError } from "./throwError"
+import { isNetworkError, isResolverError } from './errorTypes';
 
 Error.stackTraceLimit = 20
 
@@ -14,7 +15,8 @@ export const handleResult = async (promise: Promise<FetchResult<any, Record<stri
     }
     return { data }
   } catch (e) {
-    if (e.networkError && e.networkError.result) {
+
+    if (isNetworkError(e) && e.networkError.result) {
       const { extensions, originalError, message } = e.networkError.result.errors[0]
       const stack = originalError ? originalError.stack : callStack
       throwError(
@@ -22,7 +24,7 @@ export const handleResult = async (promise: Promise<FetchResult<any, Record<stri
         extensions.operation.source,
         extensions.locations[0],
         stack)
-    } else if (e.graphQLErrors && e.graphQLErrors.length > 0) {
+    } else if (isResolverError(e) && e.graphQLErrors.length > 0) {
       const { extensions, message } = e.graphQLErrors[0]
       throwError(
         message,

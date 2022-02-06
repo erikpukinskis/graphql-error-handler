@@ -22,7 +22,7 @@
     "jest": "^27.4.7",
     "typescript": "^4.5.5",
     "vite": "^2.7.13",
-    "vitest": "^0.2.5"
+    "vitest": "^0.2.7"
   },
   "repository": {
     "type": "git",
@@ -30,13 +30,12 @@
   },
   "homepage": "https://github.com/erikpukinskis/graphql-error-handler",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
-    "check:types": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "check:types": "tsc --noEmit --skipLibCheck; if [ $? -eq 0 ]; then echo 8J+OiSBUeXBlcyBhcmUgZ29vZCEKCg== | base64 -d; fi",
     "build": "npm run build:vite; npm run build:types",
     "build:vite": "vite build",
-    "build:types": "tsc src/index.ts --showConfig --declaration --emitDeclarationOnly --outDir dist --esModuleInterop --skipLibCheck",
+    "build:types": "tsc src/index.ts --declaration --emitDeclarationOnly --outDir dist --skipLibCheck",
     "bump": "./bump.sh"
-  },
+  }
 }

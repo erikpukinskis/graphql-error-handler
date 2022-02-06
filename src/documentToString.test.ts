@@ -1,6 +1,7 @@
 import { documentToString } from './documentToString';
 import { DocumentNode } from 'graphql';
 import gql from "graphql-tag";
+import { describe, it, expect } from 'vitest'
 
 describe("documentToString", () => {
   it("should deindent", () => {

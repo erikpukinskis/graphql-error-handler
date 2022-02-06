@@ -9,12 +9,12 @@ function isServerParseError(error: Error | undefined | null): error is ServerPar
 
 export const errorLink = onError((err) => {
   const { networkError, operation } = err
-  debugger
   if (isServerParseError(networkError)) {
     const { status } = networkError.response
     if (status >= 400) {
       const error = new Error()
-      throwError(`Server returned HTTP ${status}`, operation?.query?.loc?.source.body, { line: 1, column: 1 }, error.stack)
+      const source = operation?.query?.loc?.source.body
+      throwError(`Server returned HTTP ${status}`, source, { line: 1, column: 1 }, error.stack)
     }
   }
 });

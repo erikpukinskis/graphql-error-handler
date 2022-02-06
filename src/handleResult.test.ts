@@ -2,10 +2,12 @@ import NetworkError from './test/NetworkError.json'
 import ServerParseError from './test/ServerParseError.json'
 import ValidationFailed from './test/ValidationFailed.json'
 import { handleResult } from "./handleResult"
+import { describe, it, expect } from 'vitest'
+import type { FetchResult } from '@apollo/client';
 
 describe("handleResult", () => {
   it("should proxy through data if there's no error", async () => {
-    const operation = new Promise((resolve) => {
+    const operation = new Promise<FetchResult>((resolve) => {
       resolve({
         data: {
           myQuery: {
@@ -33,9 +35,10 @@ describe("handleResult", () => {
     try {
       await handleResult(operation)
     } catch (e) {
-      expect(e.message).toMatch("<<< ERROR OCCURRED HERE >>>createWhens")
-      expect(e.message).toMatch("handleResult.test.ts")
-      expect(e.message).not.toMatch("Spare Error")
+      const message = (e as Error).message
+      expect(message).toMatch("<<< ERROR OCCURRED HERE >>>createWhens")
+      expect(message).toMatch("handleResult.test.ts")
+      expect(message).not.toMatch("Spare Error")
       return
     }
     throw new Error("no error was caught")
@@ -51,9 +54,10 @@ describe("handleResult", () => {
     try {
       await handleResult(operation)
     } catch (e) {
-      expect(e.message).toMatch("<<< ERROR OCCURRED HERE >>>createWhens")
-      expect(e.message).toMatch("handleResult.test.ts")
-      expect(e.message).not.toMatch("Spare Error")
+      const message = (e as Error).message
+      expect(message).toMatch("<<< ERROR OCCURRED HERE >>>createWhens")
+      expect(message).toMatch("handleResult.test.ts")
+      expect(message).not.toMatch("Spare Error")
       return
     }
     throw new Error("no error was caught")
@@ -69,8 +73,9 @@ describe("handleResult", () => {
     try {
       await handleResult(operation)
     } catch (e) {
-      expect(e.message).toMatch("Unexpected token < in JSON at position 0")
-      expect(e.message).not.toMatch("Spare Error")
+      const message = (e as Error).message
+      expect(message).toMatch("Unexpected token < in JSON at position 0")
+      expect(message).not.toMatch("Spare Error")
       return
     }
     throw new Error("no error was caught")

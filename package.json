@@ -5,12 +5,12 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/graphql-error-handler.umd.js",
-  "module": "./dist/graphql-error-handler.es.js",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
   "exports": {
     ".": {
-      "import": "./dist/graphql-error-handler.es.js",
-      "require": "./dist/graphql-error-handler.umd.js"
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
     }
   },
   "peerDependencies": {
@@ -38,9 +38,10 @@
     "test": "vitest run",
     "test:watch": "vitest watch",
     "check:types": "tsc --noEmit --skipLibCheck; if [ $? -eq 0 ]; then echo 8J+OiSBUeXBlcyBhcmUgZ29vZCEKCg== | base64 -d; fi",
-    "build": "npm run build:vite; npm run build:types",
+    "build": "npm run build:vite; npm run build:types; npm run build:files",
     "build:vite": "vite build",
     "build:types": "tsc src/index.ts --declaration --emitDeclarationOnly --outDir dist --skipLibCheck",
+    "build:files": "mv dist/index.d.ts dist/index.umd.d.ts",
     "bump": "./bump.sh"
   }
 }

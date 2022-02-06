@@ -1,10 +1,13 @@
 import { FetchResult } from "@apollo/client";
-import { throwError } from "./throwError"
+import { GraphQLResponse } from 'apollo-server-types';
 import { isNetworkError, isResolverError } from './errorTypes';
-
+import { throwError } from "./throwError";
 Error.stackTraceLimit = 20
 
-export const handleResult = async (promise: Promise<FetchResult<any, Record<string, any>, Record<string, any>>>) => {
+type ApolloServerExecuteOperationResponse = GraphQLResponse
+type ApolloClientResponse = FetchResult<any, Record<string, any>, Record<string, any>>
+
+export const handleResult = async (promise: Promise<ApolloClientResponse> | Promise<ApolloServerExecuteOperationResponse>) => {
   const spareError = new Error('Spare Error')
   const callStack = spareError.stack
   try {

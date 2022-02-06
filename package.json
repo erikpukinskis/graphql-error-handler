@@ -5,12 +5,12 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/my-lib.umd.js",
-  "module": "./dist/my-lib.es.js",
+  "main": "./dist/graphql-error-handler.umd.js",
+  "module": "./dist/graphql-error-handler.es.js",
   "exports": {
     ".": {
-      "import": "./dist/my-lib.es.js",
-      "require": "./dist/my-lib.umd.js"
+      "import": "./dist/graphql-error-handler.es.js",
+      "require": "./dist/graphql-error-handler.umd.js"
     }
   },
   "peerDependencies": {

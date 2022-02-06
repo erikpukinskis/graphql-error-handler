@@ -16,20 +16,22 @@ type GraphQLError = {
 
 type NetworkError = Error & {
   networkError: {
-    result?: {
+    result: {
       errors: GraphQLError[]
     }
   }
 }
 
-export function isNetworkError(e: unknown): e is NetworkError {
-  return Object.hasOwnProperty.call(e, 'networkError')
+export function isNetworkError(error: unknown): error is NetworkError {
+  const e = error as NetworkError
+  return e.networkError != null && e.networkError.result != null
 }
 
 type ResolverError = Error & {
-  graphQLErrors: GraphQLError[]
+  graphQLErrors: [GraphQLError]
 }
 
-export function isResolverError(e: unknown): e is ResolverError {
-  return Object.hasOwnProperty.call(e, 'graphQLErrors')
+export function isResolverError(error: unknown): error is ResolverError {
+  const e = error as ResolverError
+  return e.graphQLErrors != null && e.graphQLErrors.length > 0
 }

@@ -1,6 +1,6 @@
 import { annotateSource } from "./annotateSource"
 import { SourceLocation } from "graphql"
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect } from "vitest"
 
 describe("annotateSource", () => {
   it("should mark the position in the query where the error occurred", () => {

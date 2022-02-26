@@ -1,13 +1,14 @@
 `graphql-error-handler` takes a GraphQL error and throws it, with a few nice features:
 
-1) It will print out the resolver error trace if an error was thrown in the resolver
-2) It will log the query and mark exactly where the syntax error occurred, if there was one
+1. It will print out the resolver error trace if an error was thrown in the resolver
+2. It will log the query and mark exactly where the syntax error occurred, if there was one
 
 It also has no dependencies!
 
 ### Todo
-* [ ] Make sure `handleResult` handles 404s as gracefully as `errorLink`. Add a test for
-  `ServeParseError404.json`.
+
+- [ ] Make sure `handleResult` handles 404s as gracefully as `errorLink`. Add a test for
+      `ServeParseError404.json`.
 
 ### Setting up the error link
 
@@ -17,17 +18,17 @@ link like this:
 
 ```js
 import { ApolloClient, from, HttpLink } from "@apollo/client"
-import { errorLink } from 'graphql-error-handler'
+import { errorLink } from "graphql-error-handler"
 
 const client = new ApolloClient({
   link: from([
     errorLink,
     new HttpLink({
-      uri: 'http://localhost:4000/graphql',
-    })
-  ])
-});
-````
+      uri: "http://localhost:4000/graphql",
+    }),
+  ]),
+})
+```
 
 ### Guaranteeing `data` in components
 
@@ -63,12 +64,14 @@ const MyComponent = () => {
   return <button onClick={handleClick}>Mutate</button>
 }
 ```
+
 Note that TypeScript will know that `data` is always going to be truthy, because `handleResult` will
 throw a nice error in any other circumstance.
 
 ### Catching server errors in resolver tests:
 
 Add a test helper like so:
+
 ```
 import { handleResult } from 'graphql-error-handler';
 
@@ -78,6 +81,7 @@ export const getApolloQueryFunction = (apollo: ApolloServer) => {
   }
 }
 ```
+
 ... and then when there's a problem in your query your test will throw a helpful error:
 
 ```

@@ -1,31 +1,31 @@
 {
-    "graphQLErrors": [],
-    "clientErrors": [],
-    "networkError": {
-        "name": "ServerParseError",
-        "response": {
-            "type": "default",
-            "status": 502,
-            "ok": false,
-            "statusText": "",
-            "headers": {
-                "map": {
-                    "content-length": "559",
-                    "content-type": "text/html",
-                    "date": "Sun, 23 Jan 2022 20:57:47 GMT",
-                    "server": "nginx/1.17.7",
-                    "strict-transport-security": "max-age=31536000; includeSubDomains",
-                    "x-content-type-options": "nosniff",
-                    "x-served-by": "vsclk-pf-prod-rel-usw2-cluster"
-                }
-            },
-            "url": "https://erikpukinskis-super-project-world-application-7v7ggw3pgg7-8080.githubpreview.dev/graphql",
-            "_bodyInit": {},
-            "_bodyBlob": {},
-            "bodyUsed": true
-        },
-        "statusCode": 502,
-        "bodyText": "<html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.17.7</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
+  "graphQLErrors": [],
+  "clientErrors": [],
+  "networkError": {
+    "name": "ServerParseError",
+    "response": {
+      "type": "default",
+      "status": 502,
+      "ok": false,
+      "statusText": "",
+      "headers": {
+        "map": {
+          "content-length": "559",
+          "content-type": "text/html",
+          "date": "Sun, 23 Jan 2022 20:57:47 GMT",
+          "server": "nginx/1.17.7",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-content-type-options": "nosniff",
+          "x-served-by": "vsclk-pf-prod-rel-usw2-cluster"
+        }
+      },
+      "url": "https://erikpukinskis-super-project-world-application-7v7ggw3pgg7-8080.githubpreview.dev/graphql",
+      "_bodyInit": {},
+      "_bodyBlob": {},
+      "bodyUsed": true
     },
-    "message": "Unexpected token < in JSON at position 0"
+    "statusCode": 502,
+    "bodyText": "<html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.17.7</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
+  },
+  "message": "Unexpected token < in JSON at position 0"
 }

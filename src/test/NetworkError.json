@@ -1,65 +1,65 @@
 {
-    "graphQLErrors": [],
-    "clientErrors": [],
-    "networkError": {
-        "name": "ServerError",
-        "response": {
-            "type": "default",
-            "status": 400,
-            "ok": false,
-            "statusText": "",
-            "headers": {
-                "map": {
-                    "access-control-allow-origin": "*",
-                    "content-length": "1456",
-                    "content-type": "application/json; charset=utf-8",
-                    "date": "Sun, 23 Jan 2022 21:07:30 GMT",
-                    "etag": "W/\"5b0-38s0Te8MHw7neZBOq0eLY/v9Bz8\"",
-                    "server": "nginx/1.17.7",
-                    "strict-transport-security": "max-age=31536000; includeSubDomains",
-                    "x-content-type-options": "nosniff",
-                    "x-served-by": "vsclk-pf-prod-rel-usw2-cluster"
-                }
-            },
-            "url": "https://erikpukinskis-super-project-world-application-7v7ggw3pgg7-8080.githubpreview.dev/graphql",
-            "_bodyInit": {},
-            "_bodyBlob": {},
-            "bodyUsed": true
-        },
-        "statusCode": 400,
-        "result": {
-            "errors": [
-                {
-                    "message": "Cannot query field \"createWhens\" on type \"Mutation\". Did you mean \"createWhen\", \"createThen\", or \"createStory\"?",
-                    "extensions": {
-                        "code": "GRAPHQL_VALIDATION_FAILED",
-                        "locations": [
-                            {
-                                "line": 2,
-                                "column": 3
-                            }
-                        ],
-                        "operation": {
-                            "source": "mutation CreateWhenAndStory($text: String!) {\n  createWhens(text: $text) {\n    id\n    storyId\n    __typename\n  }\n}"
-                        },
-                        "exception": {
-                            "stacktrace": [
-                                "GraphQLError: Cannot query field \"createWhens\" on type \"Mutation\". Did you mean \"createWhen\", \"createThen\", or \"createStory\"?",
-                                "    at Object.Field (/workspaces/application/node_modules/graphql/validation/rules/FieldsOnCorrectTypeRule.js:51:13)",
-                                "    at Object.enter (/workspaces/application/node_modules/graphql/language/visitor.js:303:32)",
-                                "    at Object.enter (/workspaces/application/node_modules/graphql/utilities/TypeInfo.js:391:27)",
-                                "    at visit (/workspaces/application/node_modules/graphql/language/visitor.js:200:21)",
-                                "    at validate (/workspaces/application/node_modules/graphql/validation/validate.js:91:24)",
-                                "    at validate (/workspaces/application/node_modules/apollo-server-core/src/requestPipeline.ts:470:27)",
-                                "    at processGraphQLRequest (/workspaces/application/node_modules/apollo-server-core/src/requestPipeline.ts:245:30)",
-                                "    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
-                                "    at processHTTPRequest (/workspaces/application/node_modules/apollo-server-core/src/runHttpQuery.ts:346:24)"
-                            ]
-                        }
-                    }
-                }
-            ]
+  "graphQLErrors": [],
+  "clientErrors": [],
+  "networkError": {
+    "name": "ServerError",
+    "response": {
+      "type": "default",
+      "status": 400,
+      "ok": false,
+      "statusText": "",
+      "headers": {
+        "map": {
+          "access-control-allow-origin": "*",
+          "content-length": "1456",
+          "content-type": "application/json; charset=utf-8",
+          "date": "Sun, 23 Jan 2022 21:07:30 GMT",
+          "etag": "W/\"5b0-38s0Te8MHw7neZBOq0eLY/v9Bz8\"",
+          "server": "nginx/1.17.7",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-content-type-options": "nosniff",
+          "x-served-by": "vsclk-pf-prod-rel-usw2-cluster"
         }
+      },
+      "url": "https://erikpukinskis-super-project-world-application-7v7ggw3pgg7-8080.githubpreview.dev/graphql",
+      "_bodyInit": {},
+      "_bodyBlob": {},
+      "bodyUsed": true
     },
-    "message": "Response not successful: Received status code 400"
+    "statusCode": 400,
+    "result": {
+      "errors": [
+        {
+          "message": "Cannot query field \"createWhens\" on type \"Mutation\". Did you mean \"createWhen\", \"createThen\", or \"createStory\"?",
+          "extensions": {
+            "code": "GRAPHQL_VALIDATION_FAILED",
+            "locations": [
+              {
+                "line": 2,
+                "column": 3
+              }
+            ],
+            "operation": {
+              "source": "mutation CreateWhenAndStory($text: String!) {\n  createWhens(text: $text) {\n    id\n    storyId\n    __typename\n  }\n}"
+            },
+            "exception": {
+              "stacktrace": [
+                "GraphQLError: Cannot query field \"createWhens\" on type \"Mutation\". Did you mean \"createWhen\", \"createThen\", or \"createStory\"?",
+                "    at Object.Field (/workspaces/application/node_modules/graphql/validation/rules/FieldsOnCorrectTypeRule.js:51:13)",
+                "    at Object.enter (/workspaces/application/node_modules/graphql/language/visitor.js:303:32)",
+                "    at Object.enter (/workspaces/application/node_modules/graphql/utilities/TypeInfo.js:391:27)",
+                "    at visit (/workspaces/application/node_modules/graphql/language/visitor.js:200:21)",
+                "    at validate (/workspaces/application/node_modules/graphql/validation/validate.js:91:24)",
+                "    at validate (/workspaces/application/node_modules/apollo-server-core/src/requestPipeline.ts:470:27)",
+                "    at processGraphQLRequest (/workspaces/application/node_modules/apollo-server-core/src/requestPipeline.ts:245:30)",
+                "    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                "    at processHTTPRequest (/workspaces/application/node_modules/apollo-server-core/src/runHttpQuery.ts:346:24)"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "message": "Response not successful: Received status code 400"
 }

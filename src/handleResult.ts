@@ -1,14 +1,22 @@
-import { FetchResult } from "@apollo/client";
-import { GraphQLResponse } from 'apollo-server-types';
-import { isNetworkError, isResolverError } from './errorTypes';
-import { throwError } from "./throwError";
+import { FetchResult } from "@apollo/client"
+import { GraphQLResponse } from "apollo-server-types"
+import { isNetworkError, isResolverError } from "./errorTypes"
+import { throwError } from "./throwError"
 Error.stackTraceLimit = 20
 
 type ApolloServerExecuteOperationResponse = GraphQLResponse
-type ApolloClientResponse = FetchResult<any, Record<string, any>, Record<string, any>>
+type ApolloClientResponse = FetchResult<
+  unknown,
+  Record<string, unknown>,
+  Record<string, unknown>
+>
 
-export const handleResult = async (promise: Promise<ApolloClientResponse> | Promise<ApolloServerExecuteOperationResponse>) => {
-  const spareError = new Error('Spare Error')
+export const handleResult = async (
+  promise:
+    | Promise<ApolloClientResponse>
+    | Promise<ApolloServerExecuteOperationResponse>
+) => {
+  const spareError = new Error("Spare Error")
   const callStack = spareError.stack
   try {
     const { data, errors } = await promise
@@ -18,22 +26,24 @@ export const handleResult = async (promise: Promise<ApolloClientResponse> | Prom
     }
     return { data }
   } catch (e) {
-
     if (isNetworkError(e)) {
-      const { extensions, originalError, message } = e.networkError.result.errors[0]
+      const { extensions, originalError, message } =
+        e.networkError.result.errors[0]
       const stack = originalError ? originalError.stack : callStack
       throwError(
         message,
         extensions.operation.source,
         extensions.locations[0],
-        stack)
+        stack
+      )
     } else if (isResolverError(e)) {
       const { extensions, message } = e.graphQLErrors[0]
       throwError(
         message,
         extensions.operation.source,
         extensions.locations[0],
-        callStack)
+        callStack
+      )
     } else {
       throw e
     }

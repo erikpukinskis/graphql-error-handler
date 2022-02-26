@@ -1,9 +1,9 @@
-import NetworkError from './test/NetworkError.json'
-import ServerParseError from './test/ServerParseError502.json'
-import ValidationFailed from './test/ValidationFailed.json'
+import NetworkError from "./test/NetworkError.json"
+import ServerParseError from "./test/ServerParseError502.json"
+import ValidationFailed from "./test/ValidationFailed.json"
 import { handleResult } from "./handleResult"
-import { describe, it, expect } from 'vitest'
-import type { FetchResult } from '@apollo/client';
+import { describe, it, expect } from "vitest"
+import type { FetchResult } from "@apollo/client"
 
 describe("handleResult", () => {
   it("should proxy through data if there's no error", async () => {
@@ -11,9 +11,9 @@ describe("handleResult", () => {
       resolve({
         data: {
           myQuery: {
-            id: 2
-          }
-        }
+            id: 2,
+          },
+        },
       })
     })
 
@@ -21,7 +21,7 @@ describe("handleResult", () => {
     expect(result).toHaveProperty("data.myQuery.id", 2)
   })
 
-  it("should work on a NetworkError", async() => {
+  it("should work on a NetworkError", async () => {
     const operation = (async () => {
       const error = new Error()
       Object.assign(error, NetworkError)
@@ -44,7 +44,7 @@ describe("handleResult", () => {
     throw new Error("no error was caught")
   })
 
-  it("should work on a ValidationFailed error", async() => {
+  it("should work on a ValidationFailed error", async () => {
     const operation = (async () => {
       const error = new Error()
       Object.assign(error, ValidationFailed)
@@ -63,7 +63,7 @@ describe("handleResult", () => {
     throw new Error("no error was caught")
   })
 
-  it("should work on a ServerParseError", async() => {
+  it("should work on a ServerParseError", async () => {
     const operation = (async () => {
       const error = new Error()
       Object.assign(error, ServerParseError)

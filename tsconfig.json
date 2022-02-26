@@ -2,6 +2,11 @@
   "compilerOptions": {
     "strict": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "lib": ["es2017"],
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "downlevelIteration": true,
+    "outDir": "dist"
   }
 }

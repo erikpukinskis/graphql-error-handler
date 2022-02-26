@@ -20,15 +20,20 @@
     "@apollo/client": "^3.5.7",
     "@types/jest": "^27.4.0",
     "@types/react": "^17.0.38",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
     "apollo-server-types": "^3.5.1",
     "esbuild": "^0.14.14",
     "esbuild-jest": "^0.5.0",
+    "eslint": "^8.10.0",
     "graphql": "^16.2.0",
     "graphql-tag": "^2.12.6",
     "jest": "^27.4.7",
+    "prettier": "^2.5.1",
+    "tsc-alias": "^1.6.3",
     "typescript": "^4.5.5",
-    "vite": "^2.7.13",
-    "vitest": "^0.2.7"
+    "vite": "^2.8.4",
+    "vitest": "^0.5.7"
   },
   "repository": {
     "type": "git",
@@ -36,13 +41,19 @@
   },
   "homepage": "https://github.com/erikpukinskis/graphql-error-handler",
   "scripts": {
+    "confgen": "npx confgen@latest yarn typescript vite vitest prettier eslint library:GraphQLErrorHandler",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "check:types": "tsc --noEmit --skipLibCheck; if [ $? -eq 0 ]; then echo 8J+OiSBUeXBlcyBhcmUgZ29vZCEKCg== | base64 -d; fi",
-    "build": "npm run build:vite; npm run build:types; npm run build:files",
+    "check:types": "tsc --noEmit; if [ $? -eq 0 ]; then echo 8J+OiSBUeXBlcyBhcmUgZ29vZCEKCg== | base64 -d; fi",
+    "build": "rm -rf dist/*; yarn run build:vite; yarn run build:types",
     "build:vite": "vite build",
-    "build:types": "tsc src/index.ts --declaration --emitDeclarationOnly --outDir dist --skipLibCheck",
+    "build:types": "tsc --declaration --emitDeclarationOnly -p tsconfig.json --skipLibCheck; tsc-alias -p tsconfig.json; mv dist/index.d.ts dist/index.umd.d.ts",
     "build:files": "mv dist/index.d.ts dist/index.umd.d.ts",
-    "bump": "./bump.sh"
+    "bump": "./bump.sh",
+    "check:lint": "eslint --ignore-path .gitignore .; if [ $? -eq 0 ]; then echo 8J+OiSBObyBsaW50IGluIHRoaXMgY29kZSEKCg== | base64 -d; fi",
+    "fix:lint": "eslint --ignore-path .gitignore . --fix; if [ $? -eq 0 ]; then echo 8J+OiSBObyBsaW50IGluIHRoaXMgY29kZSEKCg== | base64 -d; fi",
+    "fix:format": "prettier --write --ignore-path .gitignore .",
+    "fix": "yarn fix:lint; yarn fix:format",
+    "all": "yarn build; yarn fix; yarn check:types; yarn test; echo all"
   }
 }

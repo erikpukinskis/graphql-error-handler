@@ -1,26 +1,31 @@
-const path = require('path')
-const { defineConfig } = require('vite')
+import path from "path"
+import { defineConfig } from "vite"
 
-module.exports = defineConfig({
+export default defineConfig({
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+
+  plugins: [],
+
   build: {
+    sourcemap: true,
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
-      name: 'graphql-error-handler',
-      fileName: (format) => `index.${format}.js`
+      entry: path.resolve(__dirname, "src/index.ts"),
+      name: "GraphQLErrorHandler",
+      fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ['graphql', '@apollo/client'],
+      external: [],
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps
-        globals: {
-          'graphql': 'GraphQL',
-          '@apollo/client': 'ApolloClient',
-        },
+        globals: {},
       },
     },
-    sourcemap: true,
   },
 })

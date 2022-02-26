@@ -1,10 +1,16 @@
+import { ServerParseError } from "@apollo/client/link/http"
+import { throwError } from "./throwError"
+import { onError } from "@apollo/client/link/error"
 
-import { ServerParseError } from '@apollo/client/link/http';
-import { throwError } from './throwError';
-import { onError } from "@apollo/client/link/error";
-
-function isServerParseError(error: Error | undefined | null): error is ServerParseError {
-  return error != null && Object.prototype.hasOwnProperty.call(error, 'bodyText') && Object.prototype.hasOwnProperty.call(error, 'response') && Object.prototype.hasOwnProperty.call(error, 'statusCode')
+function isServerParseError(
+  error: Error | undefined | null
+): error is ServerParseError {
+  return (
+    error != null &&
+    Object.prototype.hasOwnProperty.call(error, "bodyText") &&
+    Object.prototype.hasOwnProperty.call(error, "response") &&
+    Object.prototype.hasOwnProperty.call(error, "statusCode")
+  )
 }
 
 export const errorLink = onError((err) => {
@@ -14,7 +20,12 @@ export const errorLink = onError((err) => {
     if (status >= 400) {
       const error = new Error()
       const source = operation?.query?.loc?.source.body
-      throwError(`Server returned HTTP ${status}`, source, { line: 1, column: 1 }, error.stack)
+      throwError(
+        `Server returned HTTP ${status}`,
+        source,
+        { line: 1, column: 1 },
+        error.stack
+      )
     }
   }
-});
+})

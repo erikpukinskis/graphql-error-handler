@@ -40,7 +40,7 @@
     "tsc-alias": "^1.6.3",
     "typescript": "^4.5.5",
     "vite": "^2.8.4",
-    "vitest": "0.5.4"
+    "vitest": "^0.5.8"
   },
   "repository": {
     "type": "git",
@@ -48,11 +48,11 @@
   },
   "homepage": "https://github.com/erikpukinskis/graphql-error-handler",
   "scripts": {
-    "confgen": "npx confgen@latest yarn typescript vite vitest prettier eslint library:GraphQLErrorHandler",
+    "confgen": "npx confgen@latest codespaces yarn typescript vite vitest prettier eslint library:GraphQLErrorHandler",
     "test": "yarn run test:generate; vitest run",
     "test:generate": "graphql-codegen --config src/test/apolloClient/codegen.yml",
     "test:watch": "vitest watch",
-    "check:types": "tsc --noEmit; if [ $? -eq 0 ]; then echo 8J+OiSBUeXBlcyBhcmUgZ29vZCEKCg== | base64 -d; fi",
+    "check:types": "tsc --noEmit -p tsconfig.json; if [ $? -eq 0 ]; then echo 8J+OiSBUeXBlcyBhcmUgZ29vZCEKCg== | base64 -d; fi",
     "build": "rm -rf dist/*; yarn run build:vite; yarn run build:types",
     "build:vite": "vite build",
     "build:types": "tsc --declaration --emitDeclarationOnly -p tsconfig.json --skipLibCheck; tsc-alias -p tsconfig.json; mv dist/index.d.ts dist/index.umd.d.ts",

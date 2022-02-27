@@ -1,0 +1,7 @@
+schema: src/test/apolloClient/schema.graphql
+documents:
+  - "src/test/apolloClient/**/*.tsx"
+  - "!src/test/apolloClient/gql/**/*"
+generates:
+  ./src/test/apolloClient/gql/:
+    preset: gql-tag-operations-preset

@@ -1,0 +1,8 @@
+type Task {
+  id: ID!
+  text: String!
+}
+
+type Mutation {
+  createTask(text: String!): Task!
+}

@@ -26,20 +26,12 @@ mutation CreateTask($text: String!) {
 const executeOperation: ResponseResolver<
   GraphQLRequest<Record<string, unknown>>,
   GraphQLContext<Record<string, unknown>>
-> = async (
-  {
-    body: {
-      variables: { text },
-    },
-  },
-  res,
-  ctx
-) => {
+> = async ({ body }, res, ctx) => {
   return res(
     ctx.data({
       createTask: {
         id: "42",
-        text,
+        text: body?.variables.text,
       },
     })
   )

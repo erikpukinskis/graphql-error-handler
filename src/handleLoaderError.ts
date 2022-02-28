@@ -1,9 +1,9 @@
-import { throwError } from "./throwError"
+import { buildError } from "./buildError"
 
 export const handleLoaderError = (
   e: Error,
   operationSource: string,
   filename: string
 ) => {
-  throwError(e.message, operationSource, undefined, e.stack, filename)
+  throw buildError(e.message, operationSource, undefined, e.stack, filename)
 }

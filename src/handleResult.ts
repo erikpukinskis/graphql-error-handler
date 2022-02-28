@@ -1,26 +1,19 @@
-import { FetchResult } from "@apollo/client"
-import { GraphQLResponse } from "apollo-server-types"
+import type { GraphQLFormattedError } from "graphql"
 import { isNetworkError, isResolverError } from "./errorTypes"
-import { throwError } from "./throwError"
+import { buildError } from "./buildError"
 Error.stackTraceLimit = 20
 
-type ApolloServerExecuteOperationResponse = GraphQLResponse
-type ApolloClientResponse = FetchResult<
-  unknown,
-  Record<string, unknown>,
-  Record<string, unknown>
->
-
-export const handleResult = async (
-  promise:
-    | Promise<ApolloClientResponse>
-    | Promise<ApolloServerExecuteOperationResponse>
+export const handleResult = async <Data extends Record<string, unknown>>(
+  promise: Promise<{
+    data?: Data | null | undefined
+    errors?: readonly GraphQLFormattedError[]
+  }>
 ) => {
   const spareError = new Error("Spare Error")
   const callStack = spareError.stack
   try {
     const { data, errors } = await promise
-    if (!data) {
+    if (data == null) {
       if (!errors || errors.length < 1) throw new Error("Seems unlikely")
       throw new Error("don't know how to handle these anymore")
     }
@@ -30,7 +23,7 @@ export const handleResult = async (
       const { extensions, originalError, message } =
         e.networkError.result.errors[0]
       const stack = originalError ? originalError.stack : callStack
-      throwError(
+      throw buildError(
         message,
         extensions.operation.source,
         extensions.locations[0],
@@ -38,7 +31,7 @@ export const handleResult = async (
       )
     } else if (isResolverError(e)) {
       const { extensions, message } = e.graphQLErrors[0]
-      throwError(
+      throw buildError(
         message,
         extensions.operation.source,
         extensions.locations[0],

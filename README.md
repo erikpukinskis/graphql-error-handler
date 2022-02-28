@@ -116,7 +116,7 @@ it won't tell you where it is. `graphql-error-handler` can help:
 ```
 // jest-transform-graphql.js
 const loader = require('graphql-tag/loader');
-const { throwError } = require("graphql-error-handler")
+const { handleLoaderError } = require("graphql-error-handler")
 
 module.exports = {
   process(src, filename) {

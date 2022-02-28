@@ -12,7 +12,7 @@ import { SourceLocation, DocumentNode } from "graphql"
 //   ]
 // }
 
-export const throwError = (
+export const buildError = (
   message: string,
   operationSource: string | DocumentNode | undefined,
   location: SourceLocation | undefined,
@@ -31,5 +31,5 @@ export const throwError = (
   const error = `${message}\n${
     annotatedQuery ? `${annotatedQuery}\n` : ""
   }${stack}\n`
-  throw new Error(error)
+  return new Error(error)
 }

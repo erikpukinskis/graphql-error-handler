@@ -1,5 +1,5 @@
 import { ServerParseError } from "@apollo/client/link/http"
-import { throwError } from "./throwError"
+import { buildError } from "./buildError"
 import { onError } from "@apollo/client/link/error"
 
 function isServerParseError(
@@ -20,7 +20,7 @@ export const errorLink = onError((err) => {
     if (status >= 400) {
       const error = new Error()
       const source = operation?.query?.loc?.source.body
-      throwError(
+      throw buildError(
         `Server returned HTTP ${status}`,
         source,
         { line: 1, column: 1 },

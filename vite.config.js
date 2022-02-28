@@ -10,6 +10,10 @@ export default defineConfig({
 
   plugins: [],
 
+  test: {
+    environment: "jsdom",
+  },
+
   build: {
     sourcemap: true,
     lib: {

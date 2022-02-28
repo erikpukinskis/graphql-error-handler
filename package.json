@@ -27,6 +27,7 @@
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
     "apollo-server-types": "^3.5.1",
+    "cross-fetch": "^3.1.5",
     "esbuild": "^0.14.14",
     "esbuild-jest": "^0.5.0",
     "eslint": "^8.10.0",
@@ -49,7 +50,7 @@
   "homepage": "https://github.com/erikpukinskis/graphql-error-handler",
   "scripts": {
     "confgen": "npx confgen@latest codespaces yarn typescript vite vitest prettier eslint library:GraphQLErrorHandler",
-    "test": "yarn run test:generate; vitest run",
+    "test": "vitest run",
     "test:generate": "graphql-codegen --config src/test/apolloClient/codegen.yml",
     "test:watch": "vitest watch",
     "check:types": "tsc --noEmit -p tsconfig.json; if [ $? -eq 0 ]; then echo 8J+OiSBUeXBlcyBhcmUgZ29vZCEKCg== | base64 -d; fi",

@@ -15,6 +15,7 @@ export const handleResult = async <Data extends Record<string, unknown>>(
     const { data, errors } = await promise
     if (data == null) {
       if (!errors || errors.length < 1) throw new Error("Seems unlikely")
+      console.log("ERROR", JSON.stringify(errors[0], null, 4))
       throw new Error("don't know how to handle these anymore")
     }
     return { data }

@@ -1,5 +1,5 @@
 import type { GraphQLFormattedError } from "graphql"
-import { isNetworkError, isResolverError } from "./errorTypes"
+import { isNetworkError, isResolverError, isGraphQLError } from "./errorTypes"
 import { buildError } from "./buildError"
 Error.stackTraceLimit = 20
 
@@ -15,8 +15,19 @@ export const handleResult = async <Data extends Record<string, unknown>>(
     const { data, errors } = await promise
     if (data == null) {
       if (!errors || errors.length < 1) throw new Error("Seems unlikely")
-      console.log("ERROR", JSON.stringify(errors[0], null, 4))
-      throw new Error("don't know how to handle these anymore")
+      if (!isGraphQLError(errors[0])) {
+        console.log("ERROR", JSON.stringify(errors[0], null, 4))
+        throw new Error(
+          `Don't know how to parse GraphQL error ${errors[0].message}`
+        )
+      }
+      const { extensions, message } = errors[0]
+      throw buildError(
+        message,
+        extensions.operation.source,
+        extensions.locations[0],
+        callStack
+      )
     }
     return { data }
   } catch (e) {

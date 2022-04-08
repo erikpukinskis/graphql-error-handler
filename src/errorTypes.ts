@@ -14,6 +14,10 @@ type GraphQLError = {
   originalError?: Error
 }
 
+export function isGraphQLError(e: unknown): e is GraphQLError {
+  return Array.isArray((e as GraphQLError)?.extensions?.locations)
+}
+
 type NetworkError = Error & {
   networkError: {
     result: {

@@ -130,3 +130,7 @@ module.exports = {
   },
 };
 ```
+
+### Future
+
+ - [ ] Add IncludeQueryOnErrorPlugin for Apollo Server

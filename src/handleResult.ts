@@ -22,11 +22,12 @@ export const handleResult = async <Data extends Record<string, unknown>>(
         )
       }
       const { extensions, message } = errors[0]
+      const stack = extensions.exception?.stacktrace?.join("\n") ?? callStack
       throw buildError(
         message,
         extensions.operation.source,
         extensions.locations[0],
-        callStack
+        stack
       )
     }
     return { data }

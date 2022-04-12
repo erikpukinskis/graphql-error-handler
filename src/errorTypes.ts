@@ -10,6 +10,9 @@ type GraphQLError = {
     operation: {
       source: string
     }
+    exception: {
+      stacktrace: string[]
+    }
   }
   originalError?: Error
 }

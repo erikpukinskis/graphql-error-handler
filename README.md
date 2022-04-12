@@ -30,6 +30,16 @@ const client = new ApolloClient({
 })
 ```
 
+You'll also want to make sure you're having Apollo Server pass on stack traces:
+
+```js
+const server = new ApolloServer({
+  ...
+  debug: true,
+})
+```
+... in whichever environments you want good error messages. This is off by default except maybe if you have `NODE_ENV` set to `development`.
+
 ### Guaranteeing `data` in components
 
 There are also errors that can't be caught by the error link, and have to be taken care of at the
